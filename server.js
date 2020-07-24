@@ -6,7 +6,7 @@ import datasources from './datasources'
 const server = new ApolloServer({
     typeDefs,
     resolvers,
-    datasources: () => ({
+    dataSources: () => ({
         ...datasources
     })
 })

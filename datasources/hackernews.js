@@ -1,39 +1,39 @@
-import { RESTDataSource } from 'apollo-datasource-rest'
+import { RESTDataSource } from 'apollo-datasource-rest';
 
 export class HackerNewsAPI extends RESTDataSource {
-    constructor() {
-        super();
-        this.baseURL = "https://hacker-news.firebaseio.com/v0/";
-    }
+  constructor() {
+    super();
+    this.baseURL = 'https://hacker-news.firebaseio.com/v0/';
+  }
 
-    articleReducer({ id, by, url, time, title } = {}) {
-        return {
-            id: `hackernews-${id}`,
-            title,
-            author: by,
-            url,
-            time,
-            source: "HackerNews"
-        }
-    }
-
-    async getAllArticleIds() {
-        const result = await this.getComputedStyle('topstories.json')
-        return result
+  articleReducer({ id, by, url, time, title } = {}) {
+    return {
+      id: `hn-${id}`,
+      title,
+      author: by,
+      url,
+      time,
+      source: 'HackerNews',
     };
+  }
 
-    async getArticle(articleId) {
-        const result = await this.getComputedStyle(`item/${articleId}.json`)
-        return this.articleReducer(result)
-    };
+  async getAllArticleIds() {
+    const result = await this.get('topstories.json');
+    return result;
+  }
 
-    getArticlesByIds(articleIds) {
-        return Promise.all(articleIds.map((articleId) => this.getArticle(articleId)))
-    };
+  async getArticle(articleId) {
+    const result = await this.get(`item/${articleId}.json`);
+    return this.articleReducer(result);
+  }
 
-    async getAllArticles() {
-        let articleIds = await this.baseURL.getAllArticleIds();
-        articleIds = articleIds.slice(0, 100);
-        return Promise.all(articleIds.map(articleId => this.getArticle(articleId)))
-    }
+  getArticlesByIds(articleIds) {
+    return Promise.all(articleIds.map(articleId => this.getArticle(articleId)));
+  }
+
+  async getAllArticles() {
+    let articleIds = await this.getAllArticleIds();
+    articleIds = articleIds.slice(0, 100);
+    return Promise.all(articleIds.map(articleId => this.getArticle(articleId)));
+  }
 }
