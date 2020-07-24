@@ -1,12 +1,13 @@
 import { ApolloServer } from 'apollo-server'
 import { typeDefs } from './typedefs'
 import { resolvers } from './resolvers'
+import datasources from './datasources'
 
 const server = new ApolloServer({
     typeDefs,
     resolvers,
-    dataSoources: () => ({
-        ...dataSoources
+    datasources: () => ({
+        ...datasources
     })
 })
 
