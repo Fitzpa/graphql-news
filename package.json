@@ -1,13 +1,13 @@
 {
-  "name": "newsreader-graphql",
+  "name": "graphql-news",
   "version": "1.0.0",
-  "description": "",
+  "description": "graphql for news app",
   "main": "server.js",
   "scripts": {
     "start": "nodemon --exec babel-node server.js",
     "test": "jest"
   },
-  "author": "Louie Fitzpatrick",
+  "author": "Louie Fitzpatrick - fitzpa",
   "license": "MIT",
   "jest": {
     "coverageThreshold": {
@@ -32,10 +32,9 @@
     "@babel/cli": "^7.7.4",
     "@babel/core": "^7.7.4",
     "@babel/node": "^7.7.4",
-    "@babel/plugin-proposal-optional-chaining": "^7.7.4",
     "@babel/preset-env": "^7.7.4",
     "apollo-server-testing": "^2.9.12",
     "jest": "^24.9.0",
-    "nodemon": "^2.0.1"
+    "nodemon": "^2.0.2"
   }
 }
